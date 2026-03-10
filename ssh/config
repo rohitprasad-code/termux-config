@@ -1,0 +1,13 @@
+# SSH Config for Termux
+
+# Template configuration for connecting from your phone to another machine (e.g., your Mac)
+Host 1plus
+    # Change to the IP address of the phone on the local network
+    HostName 192.168.1.6
+    Port 8022
+    
+    # Change to the username
+    User u0_a324
+    
+    # Path to the private key used to authenticate (you'll need to generate this on your phone: ssh-keygen)
+    IdentityFile ~/.ssh/id_rsa
