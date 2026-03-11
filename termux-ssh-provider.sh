@@ -17,7 +17,7 @@ IP=$(ifconfig wlan0 | grep -o 'inet addr:[0-9.]*' | awk -F: '{print $2}')
 
 # Fallback if wlan0 fails (e.g. some modern Android versions might format `ip a` differently)
 if [ -z "$IP" ]; then
-    IP=$(ip -4 addr show wlan0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+    IP=$(ip -4 addr show wlan0 2>/dev/null | grep -oE 'inet (addr:)?([0-9.]+)' | awk '{print $2}' )
 fi
 
 if [ -z "$IP" ]; then

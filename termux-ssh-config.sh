@@ -12,7 +12,7 @@ USER=$(whoami)
 IP=$(ifconfig wlan0 | grep -o 'inet addr:[0-9.]*' | awk -F: '{print $2}')
 
 if [ -z "$IP" ]; then
-    IP=$(ip -4 addr show wlan0 | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
+    IP=$(ip -4 addr show wlan0 2>/dev/null | grep -oE '(?<=inet\s)\d+(\.\d+){3}')
 fi
 
 if [ -z "$IP" ]; then
