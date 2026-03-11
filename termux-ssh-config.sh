@@ -9,11 +9,7 @@ if ! pgrep -x "sshd" > /dev/null; then
 fi
 
 USER=$(whoami)
-IP=$(ifconfig wlan0 | grep -o 'inet addr:[0-9.]*' | awk -F: '{print $2}')
-
-if [ -z "$IP" ]; then
-    IP=$(ip -4 addr show wlan0 2>/dev/null | grep -oE '(?<=inet\s)\d+(\.\d+){3}')
-fi
+IP=$(ifconfig 2>/dev/null | grep -w inet | awk '{print $2}' | sed 's/addr://' | grep -v '127.0.0.1' | head -n 1)
 
 if [ -z "$IP" ]; then
     IP="[YOUR_PHONE_IP]"

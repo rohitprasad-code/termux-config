@@ -12,16 +12,11 @@ fi
 # Get the current username
 USER=$(whoami)
 
-# Get the primary IP address (looking for the wlan0 inet address)
-IP=$(ifconfig wlan0 | grep -o 'inet addr:[0-9.]*' | awk -F: '{print $2}')
-
-# Fallback if wlan0 fails (e.g. some modern Android versions might format `ip a` differently)
-if [ -z "$IP" ]; then
-    IP=$(ip -4 addr show wlan0 2>/dev/null | grep -oE 'inet (addr:)?([0-9.]+)' | awk '{print $2}' )
-fi
+# Get the primary IP address (searches all interfaces for the first non-localhost IPv4 address)
+IP=$(ifconfig 2>/dev/null | grep -w inet | awk '{print $2}' | sed 's/addr://' | grep -v '127.0.0.1' | head -n 1)
 
 if [ -z "$IP" ]; then
-    echo "Could not find a valid IP address for wlan0. Are you connected to Wi-Fi?"
+    echo "Could not find a valid IP address. Are you connected to Wi-Fi?"
     echo "Fallback command (replace your_ip): ssh -p 8022 ${USER}@your_ip"
 else
     COMMAND="ssh -p 8022 ${USER}@${IP}"
