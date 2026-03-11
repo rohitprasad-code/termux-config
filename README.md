@@ -89,14 +89,18 @@ _(Note: If you want to connect TO Termux from your Mac, run `sshd` in Termux to 
 
 Out of the box, VS Code / Antigravity Remote SSH will **fail** to connect to Termux with an `"unexpected e_type: 2"` error. This is because the editor tries to download a standard Linux (glibc) version of Node.js to run its backend server, which Android natively rejects.
 
-To fix this, we have provided an automated script that replaces that downloaded Linux binary with Termux's native Android version of Node.js!
+Additionally, once connected, the **integrated terminal won't work** because Termux uses non-standard shell paths (e.g., `/data/data/com.termux/files/usr/bin/zsh` instead of `/bin/zsh`).
+
+To fix **both issues**, we have provided an automated script:
 
 1. On your Mac, try to connect to Termux via your editor's "Remote SSH" connection AT LEAST ONCE. It will inevitably fail. **This is expected!** It needs to fail so that it leaves its downloaded server files on your phone.
 2. Go back to your phone (via terminal SSH or natively) and run the patch script:
    ```bash
    ./termux-antigravity-patch.sh
    ```
-3. The script will find the broken server, install native `nodejs`, and swap out the binaries.
-4. Try to connect from your Mac again. The editor will see the server is already installed, skip downloading, and connect flawlessly!
+3. The script will:
+   - Find the broken server and swap in Termux's native `nodejs`
+   - **Configure the integrated terminal** to use your Termux shell (auto-detected)
+4. Try to connect from your Mac again. The editor will connect and the terminal will work!
 
 _(Note: Every time your editor gets an app update, it will download a new server, and you will need to repeat this process.)_
