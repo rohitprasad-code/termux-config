@@ -1,0 +1,9 @@
+# Ignore common macOS files
+.DS_Store
+
+# idea files
+.idea
+
+# Ignore arbitrary output files
+output.txt
+*.log
