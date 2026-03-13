@@ -83,6 +83,17 @@ This will generate the exact configuration block for your phone (e.g. `Host u0_a
 
 You must also run `passwd` on your phone first to create a password if you aren't using keys.
 
+**(New) Option 3: Automated Passwordless SSH (Mac to Termux)**
+
+To completely automate logging in without a password, use the included setup script from your Mac terminal:
+
+```bash
+# On your Mac, run:
+./termux-ssh-trusted.sh <termux_ip> <password>
+```
+
+This script will automatically copy your Mac's public SSH key into Termux's `authorized_keys` file, allowing seamless, passwordless logins moving forward.
+
 _(Note: If you want to connect TO Termux from your Mac, run `sshd` in Termux to start the server on port 8022.)_
 
 ### VS Code / Antigravity Remote SSH Native Fix

@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# This script generates the SSH command you need to paste into your Mac
-# to connect to this Termux instance.
+# This script generates the SSH command you need to paste into your Mac to connect to this Termux instance.
 
 # Ensure sshd is running
 if ! pgrep -x "sshd" > /dev/null; then
@@ -21,7 +20,7 @@ if [ -z "$IP" ]; then
 else
     COMMAND="ssh -p 8022 ${USER}@${IP}"
     echo "========================================================="
-    echo "Copy and paste the following command into your Mac's terminal:"
+    echo "Copy and paste the command into your Mac's terminal"
     echo "========================================================="
     echo ""
     echo "$COMMAND"
