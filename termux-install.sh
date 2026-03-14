@@ -42,6 +42,10 @@ if [ -f "$HOME_DIR/.ssh/config" ]; then
     echo "Backing up existing ~/.ssh/config to ~/.ssh/config.backup"
     mv "$HOME_DIR/.ssh/config" "$HOME_DIR/.ssh/config.backup"
 fi
+# Ensure sockets directory exists for SSH multiplexing
+mkdir -p "$HOME_DIR/.ssh/sockets"
+chmod 700 "$HOME_DIR/.ssh/sockets"
+
 cp "$CONFIG_DIR/ssh/config" "$HOME_DIR/.ssh/config"
 chmod 600 "$HOME_DIR/.ssh/config"
 

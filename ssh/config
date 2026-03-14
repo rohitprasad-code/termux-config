@@ -1,5 +1,16 @@
 # SSH Config for Termux
 
+# --- Global Optimizations ---
+# Prevent SSH from dropping the connection when Termux goes to sleep or network drops briefly
+Host *
+    ServerAliveInterval 60
+    ServerAliveCountMax 3
+    # Enable SSH Multiplexing (reusing one connection for multiple sessions, makes opening new tabs instant)
+    ControlMaster auto
+    ControlPath ~/.ssh/sockets/%r@%h-%p
+    ControlPersist 10m
+
+# --- Host Specific Configurations ---
 # Template configuration for connecting from your phone to another machine (e.g., your Mac)
 Host 1plus
     # Change to the IP address of the phone on the local network
