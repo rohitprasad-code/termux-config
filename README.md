@@ -42,6 +42,33 @@ chsh -s zsh
 
 After installation, restarting your terminal should load the new configuration. You can reconfigure Powerlevel10k anytime by running `p10k configure`.
 
+### Wakelock Management
+
+Wakelocks keep Termux running in the background, which is essential if you are running an SSH server or downloading large files.
+You can easily toggle this with the provided ZSH aliases:
+- Run `wlock` to acquire a wakelock.
+- Run `wulock` to release it.
+
+### Storage Integration
+
+To easily access your phone's storage (DCIM, Downloads, etc.) from within Termux, run:
+```bash
+./termux-storage-setup.sh
+```
+This will prompt Android for storage permissions and create symlinks in `~/storage`.
+
+### Package Backup & Restore
+
+Easily backup and restore your installed Termux packages, useful when switching devices.
+
+```bash
+# Backup list of installed packages to packages.txt
+./termux-backup-packages.sh
+
+# Restore packages from packages.txt
+./termux-restore-packages.sh
+```
+
 ### SSH Setup
 
 The included `ssh/config` contains a template for connecting **from your phone** to another device (like your Mac or GitHub).

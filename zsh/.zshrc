@@ -32,5 +32,9 @@ alias ll='ls -lF'
 alias la='ls -laF'
 alias l='ls -CF'
 
+# Wakelock management (Keep Termux alive in background)
+alias wlock='termux-wake-lock && echo "Wakelock acquired. Termux will run in the background."'
+alias wulock='termux-wake-unlock && echo "Wakelock released."'
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
